@@ -10,8 +10,7 @@ function drawDashboard() {
         dataType: 'json',
         success: function (dataFromJSON) {
             var data = new google.visualization.DataTable();
-
-            data.addColumn('string', 'Id');
+            data.addColumn('number', 'Id');
             data.addColumn('string', 'Name');
             data.addColumn('string', 'Gender');
             data.addColumn('string', 'Country');
@@ -19,14 +18,14 @@ function drawDashboard() {
             data.addColumn('string', 'Working Status');
             data.addColumn('string', 'Eye Colour');
             data.addColumn('number', 'Height');
-            data.addColumn('number', 'Multingual');
+            data.addColumn('number', 'Multilingual');
             data.addColumn('number', 'Siblings');
  
 
             for (var i = 0; i < dataFromJSON.length; i++) {
                 data.addRow([
                     dataFromJSON[i].id,
-                    dataFromJSON[i].first_name + ' ' + dataFromJSON[i].last_name,
+                    dataFromJSON[i].firstName + ' ' + dataFromJSON[i].lastName,
                     dataFromJSON[i].gender,
                     dataFromJSON[i].countryVisit,
                     dataFromJSON[i].age,
@@ -37,13 +36,27 @@ function drawDashboard() {
                     dataFromJSON[i].siblings
                 ]);
             };
+
             var dashboard = new google.visualization.Dashboard(
-                document.getElementById('dashboard')
+                document.getElementById('dashboardContainer')
             );
 
+            var scatterChart = new google.visualization.ChartWrapper({
+                title: 'Class age vs height',
+                chartType: 'ScatterChart',
+                containerId: 'scatterChart',
+                legend: 'none',
+                view: { coloumns: [4, 7]},
+                colors: ['black'],
+                backgroundColor: {fill: 'transparent'},
+                hAxis: { title: 'Age'},
+                vAxix: { title: 'Height'}
+            });
+
+            console.log(data);
 
             //Binding all charts/dashboard/controls
-            dashboard.bind([]);
+            // dashboard.bind([]);
             // Draw Dashboard
             dashboard.draw(data);
 
@@ -55,5 +68,6 @@ function drawDashboard() {
         },
     })
 };
+
 
 
