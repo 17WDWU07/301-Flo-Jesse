@@ -2,11 +2,46 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Formative One</title>
+	<title>Flesse Class Statistics</title>
+	
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<h1>Formative One</h1>
+	<h1 class="dashboardTitle">Flesse Class Statistics</h1>
+
+	<!-- Filter Menu Box -->
+	<div class="filterMenuBoxContainer">
+		<div class="hambuger">
+			<div class="line1"></div>
+			<div class="line2"></div>
+			<div class="line3"></div>
+		</div>
+	</div>
+
+	<!-- Charts Dashboard -->
+	<div class="dashboardContainer">
+
+		<!-- Donut Charts -->
+		<div class="donutChartContainer">
+			<div id="donutChart1"></div>
+			<div id="donutChart2"></div>
+			<div id="donutChart3"></div>
+		</div>
+
+		<!-- Middle Section Charts -->
+		<div class="middleSectionCharts">
+			<div id="scatterChart"></div>
+			<div id="barChart"></div>
+		</div>
+
+		<!-- Geo Section Charts -->
+		<div class="geoSectionCharts">
+			<div id="geoChart"></div>
+		</div>
+	</div>
+
+	
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript" src="js/custom.js"></script>
