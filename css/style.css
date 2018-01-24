@@ -11,54 +11,79 @@ body{
     text-transform: uppercase;
     letter-spacing: 0.05em;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 40px;
     padding-bottom: 20px;
-    font-size: 2.5em;
-}
-
-.filterMenuBoxContainer{
-    display: none;
+    font-size: 4em;
 }
 
 #dashboardContainer{
     width: 100vw;
     height: 100vh;
-   
+}
+
+/* First Section CSS */
+.firstSection{
+    width: 85%;
+    height: 300px;
+    margin: 20px auto;
+}
+.filterControlsContainer{
+    float: right;
+    width: 24%;
+    height: 300px;
+    background-color: #34495e;
+    box-shadow: 10px 10px 5px #22313f;
+}
+.filterHeader{
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+#control1, 
+#control2, 
+#control3{
+    margin: 15px auto;
+    text-align: center;
+    color: rgb(167, 167, 167);
+
 }
 
 .donutChartContainer{
-    width: 85%;
-    height: 400px;
+    float: left;
+    width: 75%;
+    height: 300px;
     background-color: #34495e;
-    margin: 20px auto;
     box-shadow: 10px 10px 5px #22313f;
 }
 
+/* Middle Section CSS */
 .middleSectionCharts{
     width: 85%;
-    height: 600px;
+    height: 450px;
     background-color: #34495e;
     margin: 20px auto;
     box-shadow: 10px 10px 5px #22313f;
 }
 
+/* Geo Section CSS */
 .geoSectionCharts{
     width: 85%;
-    height: 500px;
+    height: 450px;
     background-color: #34495e;
     margin: 20px auto;
     box-shadow: 10px 5px 5px #22313f;
 }
-
 #scatterChart{
     float: left;
     width: 50%;
     height: 100%;
-    background-color: lightblue;
 }
-#barChart{
+#columnChart{
     float: right;
     width: 50%;
     height: 100%;
-    background-color: rgb(128, 176, 190);
 }

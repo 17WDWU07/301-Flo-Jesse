@@ -25,7 +25,7 @@ function drawDashboard() {
             for (var i = 0; i < dataFromJSON.length; i++) {
                 data.addRow([
                     dataFromJSON[i].id,
-                    dataFromJSON[i].firstName + ' ' + dataFromJSON[i].lastName,
+                    dataFromJSON[i].firstName,
                     dataFromJSON[i].gender,
                     dataFromJSON[i].countryVisit,
                     dataFromJSON[i].age,
@@ -41,36 +41,98 @@ function drawDashboard() {
                 document.getElementById('dashboardContainer')
             );
 
+            // Scatter Chart 
             var scatterChart = new google.visualization.ChartWrapper({
                 chartType: 'ScatterChart',
                 containerId: 'scatterChart',
-                view: { 
-                    columns: [4, 7]
-                },
-                options: {
-                    width: '100%',
-                    height: '100%',
-                },
-                legend: 'none',
-                view: { columns: [4, 7]},
+
                 options:{
-                    colors: ['black'],
-                    backgroundColor: { fill: 'transparent' },
-                    width: '100%',
-                    height: '100%',
+                    title: 'Age vs Height',
+                    width: '95%',
+                    height: '95%',
+                    legend: 'none',
+                    colors: ['#cfe4f8'],
+                    backgroundColor: { 
+                        fill: 'transparent' 
+                    },
                     hAxis: { 
-                        title: 'Age' 
+                        title: 'Age',
+                        gridlines: {
+                            color: '#fff'
+                        },
+                        textStyle: {
+                            color: 'white'
+                        },
                     },
                     vAxis: { 
-                        title: 'Height' 
+                        title: 'Height',
+                        gridlines: {
+                            color: '#fff'
+                        },
+                        textStyle: {
+                            color: 'white'
+                        },
+                    }
+                },
+                view: {
+                    columns: [4, 7]
+                }   
+            });
+
+            // Column Chart
+            var columnChart = new google.visualization.ChartWrapper({
+                chartType: 'ColumnChart',
+                containerId: 'columnChart',
+
+                options: {
+                    title: 'Height Differences',
+                    width: '95%',
+                    height: '95%',
+                    legend: 'none',
+                    colors: ['#cfe4f8'],
+                    backgroundColor: {
+                        fill: 'transparent'
+                    },
+                    hAxis: {
+                        title: 'Age',
+                        gridlines: {
+                            color: '#fff'
+                        },
+                        textStyle: {
+                            color: 'white'
+                        },
+                    },
+                    vAxis: {
+                        title: 'Height',
+                        gridlines: {
+                            color: '#fff'
+                        },
+                        textStyle: {
+                            color: 'white'
+                        },
+                    }
+                },
+                view: {
+                    columns: [1, 7]
+                }
+            });
+
+            var namePicker = new google.visualization.ControlWrapper({
+                controlType: 'CategoryFilter',
+                containerId: 'control1',
+                options: {
+                    filterColumnLabel: 'Name',
+                    ui: {
+                        allowMultiple: false,
+                        allowTyping: false,
+                        labelStacking: "vertical"
                     }
                 }
-                
             });
 
             var agePicker = new google.visualization.ControlWrapper({
                 controlType: 'NumberRangeFilter',
-                containerId: 'barChart',
+                containerId: 'control2',
                 options:{
                     filterColumnLabel: 'Age',
                     ui: {
@@ -78,11 +140,12 @@ function drawDashboard() {
                     }
                 }
             });
+           
 
             console.log(data);
 
             //Binding all charts/dashboard/controls
-            dashboard.bind([agePicker], [scatterChart]);
+            dashboard.bind([namePicker, agePicker], [scatterChart, columnChart]);
             // Draw Dashboard
             dashboard.draw(data);
 
