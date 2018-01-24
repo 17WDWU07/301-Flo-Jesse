@@ -42,21 +42,38 @@ function drawDashboard() {
             );
 
             var scatterChart = new google.visualization.ChartWrapper({
-                title: 'Class age vs height',
                 chartType: 'ScatterChart',
                 containerId: 'scatterChart',
+                view: { columns: [4, 7]},
+                options: {
+                    width: '100%',
+                    height: '100%',
                 legend: 'none',
-                view: { coloumns: [4, 7]},
                 colors: ['black'],
                 backgroundColor: {fill: 'transparent'},
-                hAxis: { title: 'Age'},
-                vAxix: { title: 'Height'}
+                hAxis: { 
+                    title: 'Age', 
+                    // ticks: [20, 40,60,80,100],
+                },
+                vAxis: { title: 'Height'}
+            }
+            });
+
+            var agePicker = new google.visualization.ControlWrapper({
+                controlType: 'NumberRangeFilter',
+                containerId: 'barChart',
+                options:{
+                    filterColumnLabel: 'Age',
+                    ui: {
+                        labelStacking: "vertical"
+                    }
+                }
             });
 
             console.log(data);
 
             //Binding all charts/dashboard/controls
-            // dashboard.bind([]);
+            dashboard.bind([agePicker, scatterChart]);
             // Draw Dashboard
             dashboard.draw(data);
 
