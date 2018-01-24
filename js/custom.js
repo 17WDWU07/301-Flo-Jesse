@@ -49,6 +49,7 @@ function drawDashboard() {
                     width: '100%',
                     height: '100%',
                 legend: 'none',
+<<<<<<< HEAD
                 colors: ['black'],
                 backgroundColor: {fill: 'transparent'},
                 hAxis: { 
@@ -57,15 +58,39 @@ function drawDashboard() {
                 },
                 vAxis: { title: 'Height'}
             }
+=======
+                view: { columns: [4, 7]},
+                options:{
+                    colors: ['black'],
+                    backgroundColor: { fill: 'transparent' },
+                    width: '100%',
+                    height: '100%',
+                    hAxis: { 
+                        title: 'Age' 
+                    },
+                    vAxis: { 
+                        title: 'Height' 
+                    }
+                }
+                
+>>>>>>> Flo
             });
 
             var agePicker = new google.visualization.ControlWrapper({
                 controlType: 'NumberRangeFilter',
                 containerId: 'barChart',
+<<<<<<< HEAD
                 options:{
                     filterColumnLabel: 'Age',
                     ui: {
                         labelStacking: "vertical"
+=======
+
+                options: {
+                    filterColumnLabel: 'Age',
+                    ui: {
+                        labelStacking: 'vertical'
+>>>>>>> Flo
                     }
                 }
             });
@@ -73,7 +98,11 @@ function drawDashboard() {
             console.log(data);
 
             //Binding all charts/dashboard/controls
+<<<<<<< HEAD
             dashboard.bind([agePicker, scatterChart]);
+=======
+            dashboard.bind([agePicker], [scatterChart]);
+>>>>>>> Flo
             // Draw Dashboard
             dashboard.draw(data);
 
