@@ -140,12 +140,23 @@ function drawDashboard() {
                     }
                 }
             });
+            
+            var heightPicker = new google.visualization.ControlWrapper({
+                controlType: 'NumberRangeFilter',
+                containerId: 'control3',
+                options: {
+                    filterColumnLabel: 'Height',
+                    ui: {
+                        labelStacking: "vertical"
+                    }
+                }
+            });
            
 
             console.log(data);
 
             //Binding all charts/dashboard/controls
-            dashboard.bind([namePicker, agePicker], [scatterChart, columnChart]);
+            dashboard.bind([namePicker, agePicker, heightPicker], [scatterChart, columnChart]);
             // Draw Dashboard
             dashboard.draw(data);
 

@@ -60,14 +60,38 @@ body{
     box-shadow: 10px 10px 5px #22313f;
 }
 
+
 /* Middle Section CSS */
 .middleSectionCharts{
     width: 85%;
     height: 450px;
-    background-color: #34495e;
     margin: 20px auto;
+}
+.scatterChartContainer{
+    float: left;
+    width: 49%;
+    height: 450px;
+    background-color: #34495e;
     box-shadow: 10px 10px 5px #22313f;
 }
+.columnChartContainer{
+    float: right;
+    width: 50%;
+    height: 450px;
+    background-color: #34495e;
+    box-shadow: 10px 10px 5px #22313f;
+}
+#scatterChart{
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+#columnChart{
+    float: right;
+    width: 100%;
+    height: 100%;
+}
+
 
 /* Geo Section CSS */
 .geoSectionCharts{
@@ -76,14 +100,4 @@ body{
     background-color: #34495e;
     margin: 20px auto;
     box-shadow: 10px 5px 5px #22313f;
-}
-#scatterChart{
-    float: left;
-    width: 50%;
-    height: 100%;
-}
-#columnChart{
-    float: right;
-    width: 50%;
-    height: 100%;
 }
