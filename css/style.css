@@ -67,6 +67,15 @@ body{
     height: 300px;
     background-color: #34495e;
     box-shadow: 10px 10px 5px #22313f;
+    display: flex;
+    flex-direction: row;
+
+}
+#donutChart1,
+#donutChart2,
+#donutChart3{
+    width: 33%;
+    /* height: 100%; */
 }
 
 
@@ -130,11 +139,5 @@ body{
     margin-top: 35px;
 }
 
-.donutChartContainer > div {
-    float: left;
-    width: 30%;
-    height: 90%;
-    /*background-color: lightblue;*/
-    margin:1em;
-}
+
 

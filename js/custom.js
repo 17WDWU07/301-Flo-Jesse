@@ -162,88 +162,53 @@ function drawDashboard() {
             dashboard.draw(data);
 
             // Invokation of Charts
-
             drawGeo(dataFromJSON);
             genderPie(dataFromJSON);
             eyeColorPie(dataFromJSON);
             workingPie(dataFromJSON);
 
-            // genderPie chart w age slider
-            google.visualization.events.addListener(agePicker, 'statechange', function(){
+
+            // FILTERS
+            // Pie chart age filters 
+            google.visualization.events.addListener(agePicker, 'statechange', function () {
+                agePrepData();
+            });
+            google.visualization.events.addListener(heightPicker, 'statechange', function () {
+                heightPrepData();
+            });
+
+            function agePrepData() {
                 var range = agePicker.getState();
                 var view = new google.visualization.DataView(data);
                 view.setRows(data.getFilteredRows([
-                {
-                    column: 4,
-                    minValue: range.lowValue, 
-                    maxValue: range.highValue
-                }
+                    {
+                        column: 4,
+                        minValue: range.lowValue,
+                        maxValue: range.highValue
+                    }
                 ]));
-                console.log(view);
 
                 var filteredRows = view.ol;
                 var newData = [];
                 for (var i = 0; i < filteredRows.length; i++) {
                     newData.push(dataFromJSON[filteredRows[i]]);
                 };
-                console.log('age w pie test slider')
+
                 genderPie(newData);
-            });
-
-            // eyeColorPie w age slider
-            google.visualization.events.addListener(agePicker, 'statechange', function(){
-                var range = agePicker.getState();
-                var view = new google.visualization.DataView(data);
-                view.setRows(data.getFilteredRows([
-                {
-                    column: 4,
-                    minValue: range.lowValue, 
-                    maxValue: range.highValue
-                }
-                ]));
-                console.log(view);
-
-                var filteredRows = view.ol;
-                var newData = [];
-                for (var i = 0; i < filteredRows.length; i++) {
-                    newData.push(dataFromJSON[filteredRows[i]]);
-                };
-                console.log(' eye colour test slider')
                 eyeColorPie(newData);
-            });
-
-            // employmentPie w age slider
-            google.visualization.events.addListener(agePicker, 'statechange', function(){
-                var range = agePicker.getState();
-                var view = new google.visualization.DataView(data);
-                view.setRows(data.getFilteredRows([
-                {
-                    column: 4,
-                    minValue: range.lowValue, 
-                    maxValue: range.highValue
-                }
-                ]));
-                console.log(view);
-
-                var filteredRows = view.ol;
-                var newData = [];
-                for (var i = 0; i < filteredRows.length; i++) {
-                    newData.push(dataFromJSON[filteredRows[i]]);
-                };
-                console.log('employment slider')
                 workingPie(newData);
-            });
+                drawGeo(newData)
+            }
 
-            // genderPie w height slider
-            google.visualization.events.addListener(heightPicker, 'statechange', function(){
+            function heightPrepData() {
                 var range = heightPicker.getState();
                 var view = new google.visualization.DataView(data);
                 view.setRows(data.getFilteredRows([
-                {
-                    column: 7,
-                    minValue: range.lowValue, 
-                    maxValue: range.highValue
-                }
+                    {
+                        column: 7,
+                        minValue: range.lowValue,
+                        maxValue: range.highValue
+                    }
                 ]));
                 console.log(view);
 
@@ -254,51 +219,10 @@ function drawDashboard() {
                 };
                 console.log(' eye colour test')
                 genderPie(newData);
-            });
-
-            // eyeColorPie w height slider
-            google.visualization.events.addListener(heightPicker, 'statechange', function(){
-                var range = heightPicker.getState();
-                var view = new google.visualization.DataView(data);
-                view.setRows(data.getFilteredRows([
-                {
-                    column: 7,
-                    minValue: range.lowValue, 
-                    maxValue: range.highValue
-                }
-                ]));
-                console.log(view);
-
-                var filteredRows = view.ol;
-                var newData = [];
-                for (var i = 0; i < filteredRows.length; i++) {
-                    newData.push(dataFromJSON[filteredRows[i]]);
-                };
-                console.log(' eye colour test')
                 eyeColorPie(newData);
-            });
-
-            // workingPie w height slider
-            google.visualization.events.addListener(heightPicker, 'statechange', function(){
-                var range = heightPicker.getState();
-                var view = new google.visualization.DataView(data);
-                view.setRows(data.getFilteredRows([
-                {
-                    column: 7,
-                    minValue: range.lowValue, 
-                    maxValue: range.highValue
-                }
-                ]));
-                console.log(view);
-
-                var filteredRows = view.ol;
-                var newData = [];
-                for (var i = 0; i < filteredRows.length; i++) {
-                    newData.push(dataFromJSON[filteredRows[i]]);
-                };
-                console.log(' eye colour test')
                 workingPie(newData);
-            });
+                drawGeo(newData)
+            }
 
             // Geo Chart Filter Interactions
             google.visualization.events.addListener(countryPicker, 'statechange', function () {
@@ -348,6 +272,9 @@ function drawDashboard() {
                     newcountryData.push(dataFromJSON[filteredcountry[i]]);
                 }
 
+                genderPie(newcountryData);
+                eyeColorPie(newcountryData);
+                workingPie(newcountryData);
                 drawGeo(newcountryData);
             }
 
@@ -397,7 +324,6 @@ var pie = new google.visualization.PieChart(document.getElementById('donutChart1
 
 pie.draw(dataGender, options);
 
-console.log('pie test')
 }
 
 // eyeColor pie chart
@@ -465,10 +391,6 @@ function workingPie(data){
         }
     }
 
-    console.log(notWorking);
-    console.log(casual);
-    console.log(partTime);
-
     dataWork.addRow(["Unemployed", notWorking]);
     dataWork.addRow(["Casual", casual]);
     dataWork.addRow(["Part-time", partTime]);
@@ -486,7 +408,44 @@ var pie = new google.visualization.PieChart(document.getElementById('donutChart3
 
 pie.draw(dataWork, options);
 
-console.log('work test')
+}
+
+// Geo Chart 
+function drawGeo(data) {
+    var geoChart = new google.visualization.DataTable();
+    geoChart.addColumn('string', 'Country');
+    geoChart.addColumn('number', 'Count');
+
+    var countryArray = [];
+    var count = [];
+
+    for (var i = 0; i < data.length; i++) {
+        var key = data[i].countryVisit;
+        if (countryArray.indexOf(key) >= 0) {
+            count[countryArray.indexOf(key)]++;
+        } else {
+            countryArray.push(key);
+            count.push(1);
+        }
+    }
+
+    for (var i = 0; i < countryArray.length; i++) {
+        geoChart.addRow([countryArray[i], count[i]])
+    };
+
+    var options = {
+        // title: "Counrtry Most Wanted to Visit",
+        colorAxis: {
+            colors: ['#96b7d8', '#1e76ce']
+        },
+        backgroundColor: {
+            fill: 'transparent',
+            color: 'white'
+        }
+    };
+
+    var Geo = new google.visualization.GeoChart(document.getElementById('geoChart'));
+    Geo.draw(geoChart, options);
 }
 
 
