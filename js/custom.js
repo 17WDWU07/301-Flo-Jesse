@@ -160,7 +160,7 @@ function drawDashboard() {
             eyeColorPie(dataFromJSON);
             workingPie(dataFromJSON);
 
-            // gender pie chart w age slider
+            // genderPie chart w age slider
             google.visualization.events.addListener(agePicker, 'statechange', function(){
                 var range = agePicker.getState();
                 var view = new google.visualization.DataView(data);
@@ -178,8 +178,118 @@ function drawDashboard() {
                 for (var i = 0; i < filteredRows.length; i++) {
                     newData.push(dataFromJSON[filteredRows[i]]);
                 };
-                console.log('age w pie test')
+                console.log('age w pie test slider')
                 genderPie(newData);
+            });
+
+            // eyeColorPie w age slider
+            google.visualization.events.addListener(agePicker, 'statechange', function(){
+                var range = agePicker.getState();
+                var view = new google.visualization.DataView(data);
+                view.setRows(data.getFilteredRows([
+                {
+                    column: 4,
+                    minValue: range.lowValue, 
+                    maxValue: range.highValue
+                }
+                ]));
+                console.log(view);
+
+                var filteredRows = view.ol;
+                var newData = [];
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                };
+                console.log(' eye colour test slider')
+                eyeColorPie(newData);
+            });
+
+            // employmentPie w age slider
+            google.visualization.events.addListener(agePicker, 'statechange', function(){
+                var range = agePicker.getState();
+                var view = new google.visualization.DataView(data);
+                view.setRows(data.getFilteredRows([
+                {
+                    column: 4,
+                    minValue: range.lowValue, 
+                    maxValue: range.highValue
+                }
+                ]));
+                console.log(view);
+
+                var filteredRows = view.ol;
+                var newData = [];
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                };
+                console.log('employment slider')
+                workingPie(newData);
+            });
+
+            // genderPie w height slider
+            google.visualization.events.addListener(heightPicker, 'statechange', function(){
+                var range = heightPicker.getState();
+                var view = new google.visualization.DataView(data);
+                view.setRows(data.getFilteredRows([
+                {
+                    column: 7,
+                    minValue: range.lowValue, 
+                    maxValue: range.highValue
+                }
+                ]));
+                console.log(view);
+
+                var filteredRows = view.ol;
+                var newData = [];
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                };
+                console.log(' eye colour test')
+                genderPie(newData);
+            });
+
+            // eyeColorPie w height slider
+            google.visualization.events.addListener(heightPicker, 'statechange', function(){
+                var range = heightPicker.getState();
+                var view = new google.visualization.DataView(data);
+                view.setRows(data.getFilteredRows([
+                {
+                    column: 7,
+                    minValue: range.lowValue, 
+                    maxValue: range.highValue
+                }
+                ]));
+                console.log(view);
+
+                var filteredRows = view.ol;
+                var newData = [];
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                };
+                console.log(' eye colour test')
+                eyeColorPie(newData);
+            });
+
+            // workingPie w height slider
+            google.visualization.events.addListener(heightPicker, 'statechange', function(){
+                var range = heightPicker.getState();
+                var view = new google.visualization.DataView(data);
+                view.setRows(data.getFilteredRows([
+                {
+                    column: 7,
+                    minValue: range.lowValue, 
+                    maxValue: range.highValue
+                }
+                ]));
+                console.log(view);
+
+                var filteredRows = view.ol;
+                var newData = [];
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                };
+                console.log(' eye colour test')
+                workingPie(newData);
             });
 
 
@@ -216,8 +326,10 @@ function genderPie(data){
     var options = {
         title: "Gender",
         // pieSliceText: 'label',
+        // pieSliceText: 'none',
+
         colors:[ 'white', '#FFB9F0'],
-        pieHole: .7,
+        pieHole: .9,
         backgroundColor: {
             fill: 'transparent'
         }
@@ -230,6 +342,7 @@ pie.draw(dataGender, options);
 console.log('pie test')
 }
 
+// eyeColor pie chart
 function eyeColorPie(data){
     var dataColour = new google.visualization.DataTable();
     dataColour.addColumn('string', 'Eye Colour');
@@ -260,15 +373,13 @@ function eyeColorPie(data){
 
     var options = {
         title: "Eye colour",
-        // pieSliceText: 'label',
-        pieHole: .5,
+        pieHole: .9,
         colors:[ '#B9E9FF', '#F6BC4F', '#8BD055', '#D07928'],
-        // backgroundColor.strokeWidth: 0,
-        // pieSliceBorderColor: 'transparent',
+
         sliceVisibilityThreshold: .2,
         backgroundColor: {
             fill: 'transparent',
-            // strokeWidth: 1
+
         }
     };
 
@@ -279,6 +390,7 @@ pie.draw(dataColour, options);
 console.log('eye test')
 }
 
+// Employment pie chart
 function workingPie(data){
     var dataWork = new google.visualization.DataTable();
     dataWork.addColumn('string', 'workingStatus');
@@ -299,14 +411,14 @@ function workingPie(data){
     console.log(casual);
     console.log(partTime);
 
-    dataWork.addRow(["not working", notWorking]);
+    dataWork.addRow(["Unemployed", notWorking]);
     dataWork.addRow(["Casual", casual]);
     dataWork.addRow(["Part-time", partTime]);
 
     var options = {
         title: "Employment",
         // pieSliceText: 'label',
-        pieHole: .7,
+        pieHole: .9,
         backgroundColor: {
             fill: 'transparent'
         }
