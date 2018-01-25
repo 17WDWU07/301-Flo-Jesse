@@ -27,7 +27,7 @@ body{
     letter-spacing: 0.2px;
     text-align: center;
     margin-top: 25px;
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 /* First Section CSS */
@@ -48,14 +48,15 @@ body{
     text-transform: uppercase;
     letter-spacing: 0.2px;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-bottom: 15px;
     font-size: 1.5em;
 }
 #control1, 
 #control2, 
 #control3{
-    margin: 15px auto;
+    margin: 0 auto;
+    margin-top: 20px;
     text-align: center;
     color: rgb(167, 167, 167);
 
@@ -71,11 +72,19 @@ body{
     flex-direction: row;
 
 }
+.genderPie,
+.eyeColorPie,
+.employmentPie{
+    width: 34%;
+    height: 100%;
+}
+
 #donutChart1,
 #donutChart2,
 #donutChart3{
-    width: 33%;
-    /* height: 100%; */
+    margin: 0 auto;
+    width: 100%;
+    height: 85%;
 }
 
 

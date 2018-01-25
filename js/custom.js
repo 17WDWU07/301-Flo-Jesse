@@ -117,8 +117,6 @@ function drawDashboard() {
                 }
             });
 
-            
-            
             var countryPicker = new google.visualization.ControlWrapper({
                 controlType: 'CategoryFilter',
                 containerId: 'control1',
@@ -154,7 +152,6 @@ function drawDashboard() {
                     }
                 }
             });
-
 
             //Binding all charts/dashboard/controls
             dashboard.bind([countryPicker, agePicker, heightPicker], [scatterChart, columnChart]);
@@ -210,14 +207,12 @@ function drawDashboard() {
                         maxValue: range.highValue
                     }
                 ]));
-                console.log(view);
 
                 var filteredRows = view.ol;
                 var newData = [];
                 for (var i = 0; i < filteredRows.length; i++) {
                     newData.push(dataFromJSON[filteredRows[i]]);
                 };
-                console.log(' eye colour test')
                 genderPie(newData);
                 eyeColorPie(newData);
                 workingPie(newData);
@@ -226,16 +221,16 @@ function drawDashboard() {
 
             // Geo Chart Filter Interactions
             google.visualization.events.addListener(countryPicker, 'statechange', function () {
-                prepareData();
+                countryPrepData();
             });
             google.visualization.events.addListener(agePicker, 'statechange', function () {
-                prepareData();
+                countryPrepData();
             });
             google.visualization.events.addListener(heightPicker, 'statechange', function () {
-                prepareData();
+                countryPrepData();
             });
 
-            function prepareData(){
+            function countryPrepData(){
                 var countryChoices = countryPicker.getState();
                 var value = countryChoices.selectedValues[0];
                 var ageRange = agePicker.getState();
@@ -277,10 +272,8 @@ function drawDashboard() {
                 workingPie(newcountryData);
                 drawGeo(newcountryData);
             }
-
-
-
         },
+
         error: function (errorFromJSON) {
             alert('Something went wrong, cannot connect to server!');
         },
@@ -302,27 +295,24 @@ function genderPie(data){
         }
     }
 
-    console.log(male);
-    console.log(female);
-
     dataGender.addRow(["Male", male]);
     dataGender.addRow(["Female", female]);
 
     var options = {
-        title: "Gender",
-        // pieSliceText: 'label',
-        // pieSliceText: 'none',
 
-        colors:[ 'white', '#FFB9F0'],
-        pieHole: .9,
+        colors: ['#96b7d8', '#1e76ce'],
+        pieHole: .4,
+        legend: 'none',
+        pieSliceBorderColor: '#34495e',
+
         backgroundColor: {
             fill: 'transparent'
         }
     };
 
-var pie = new google.visualization.PieChart(document.getElementById('donutChart1'));
+    var pie = new google.visualization.PieChart(document.getElementById('donutChart1'));
 
-pie.draw(dataGender, options);
+    pie.draw(dataGender, options);
 
 }
 
@@ -333,6 +323,7 @@ function eyeColorPie(data){
     dataColour.addColumn('number', 'Count');
 
     var blue = 0, hazel = 0, green = 0, brown = 0;
+    
     for (var i = 0; i < data.length; i++) {
         if(data[i].eyeColor == "blue"){
             blue++;
@@ -345,33 +336,28 @@ function eyeColorPie(data){
         }
     }
 
-    console.log(blue);
-    console.log(hazel);
-    console.log(green);
-    console.log(brown);
-
-    dataColour.addRow(["blue", blue]);
-    dataColour.addRow(["hazel", hazel]);
-    dataColour.addRow(["green", green]);
-    dataColour.addRow(["brown", brown]);
+    dataColour.addRow(["Blue", blue]);
+    dataColour.addRow(["Hazel", hazel]);
+    dataColour.addRow(["Green", green]);
+    dataColour.addRow(["Brown", brown]);
 
     var options = {
-        title: "Eye colour",
-        pieHole: .9,
-        colors:[ '#B9E9FF', '#F6BC4F', '#8BD055', '#D07928'],
+        pieHole: .4,
+        legend: 'none',
+        // colors:[ '#B9E9FF', '#F6BC4F', '#8BD055', '#D07928'],
+        colors: ['#B9E9FF', '#96b7d8', '#68c0e2', '#1e76ce'],
+        pieSliceBorderColor: '#34495e',
 
-        sliceVisibilityThreshold: .2,
         backgroundColor: {
             fill: 'transparent',
 
         }
     };
 
-var pie = new google.visualization.PieChart(document.getElementById('donutChart2'));
+    var pie = new google.visualization.PieChart(document.getElementById('donutChart2'));
 
-pie.draw(dataColour, options);
+    pie.draw(dataColour, options);
 
-console.log('eye test')
 }
 
 // Employment pie chart
@@ -396,17 +382,19 @@ function workingPie(data){
     dataWork.addRow(["Part-time", partTime]);
 
     var options = {
-        title: "Employment",
-        // pieSliceText: 'label',
-        pieHole: .9,
+        pieHole: .4,
+        legend: 'none',
+        colors: ['#96b7d8', '#68c0e2', '#1e76ce'],
+        pieSliceBorderColor: '#34495e',
+
         backgroundColor: {
             fill: 'transparent'
         }
     };
 
-var pie = new google.visualization.PieChart(document.getElementById('donutChart3'));
+    var pie = new google.visualization.PieChart(document.getElementById('donutChart3'));
 
-pie.draw(dataWork, options);
+    pie.draw(dataWork, options);
 
 }
 
@@ -434,7 +422,6 @@ function drawGeo(data) {
     };
 
     var options = {
-        // title: "Counrtry Most Wanted to Visit",
         colorAxis: {
             colors: ['#96b7d8', '#1e76ce']
         },
