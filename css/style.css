@@ -101,3 +101,12 @@ body{
     margin: 20px auto;
     box-shadow: 10px 5px 5px #22313f;
 }
+
+.donutChartContainer > div {
+    float: left;
+    width: 30%;
+    height: 90%;
+    /*background-color: lightblue;*/
+    margin:1em;
+}
+
