@@ -47,7 +47,7 @@ function drawDashboard() {
                 containerId: 'scatterChart',
 
                 options:{
-                    title: 'Age vs Height',
+                    // title: 'Age vs Height',
                     width: '95%',
                     height: '95%',
                     legend: 'none',
@@ -85,7 +85,7 @@ function drawDashboard() {
                 containerId: 'columnChart',
 
                 options: {
-                    title: 'Height Differences',
+                    // title: 'Height Differences',
                     width: '95%',
                     height: '95%',
                     legend: 'none',
@@ -117,15 +117,18 @@ function drawDashboard() {
                 }
             });
 
-            var namePicker = new google.visualization.ControlWrapper({
+            
+            
+            var countryPicker = new google.visualization.ControlWrapper({
                 controlType: 'CategoryFilter',
                 containerId: 'control1',
                 options: {
-                    filterColumnLabel: 'Name',
+                    filterColumnLabel: 'Country',
                     ui: {
                         allowMultiple: false,
                         allowTyping: false,
-                        labelStacking: "vertical"
+                        labelStacking: "vertical",
+                        allowNone: true
                     }
                 }
             });
@@ -151,23 +154,114 @@ function drawDashboard() {
                     }
                 }
             });
-           
-
-            console.log(data);
 
             //Binding all charts/dashboard/controls
-            dashboard.bind([namePicker, agePicker, heightPicker], [scatterChart, columnChart]);
+            dashboard.bind([countryPicker, agePicker, heightPicker], [scatterChart, columnChart]);
             // Draw Dashboard
             dashboard.draw(data);
 
+            // Invokation of GeoChart
+            drawGeo(dataFromJSON);
+
+            // Geo Chart Filter Interactions
+            google.visualization.events.addListener(countryPicker, 'statechange', function () {
+                prepareData();
+            });
+            google.visualization.events.addListener(agePicker, 'statechange', function () {
+                prepareData();
+            });
+            google.visualization.events.addListener(heightPicker, 'statechange', function () {
+                prepareData();
+            });
+
+            function prepareData(){
+                var countryChoices = countryPicker.getState();
+                var value = countryChoices.selectedValues[0];
+                var ageRange = agePicker.getState();
+                var heightRange = heightPicker.getState();
+
+                var view = new google.visualization.DataView(data);
+
+                var filters = [
+                    {
+                        column: 4,
+                        minValue: ageRange.lowValue,
+                        maxValue: ageRange.highValue
+                    },
+                    {
+                        column: 7,
+                        minValue: heightRange.lowValue,
+                        maxValue: heightRange.highValue
+                    }
+                ];
+
+                if (countryChoices.selectedValues.length > 0) {
+                    filters.push({
+                        column: 3,
+                        value: value
+                    })
+                }
+
+                view.setRows(data.getFilteredRows(filters));
+                var filteredcountry = view.ol;
+                var newcountryData = [];
+
+
+                for (let i = 0; i < filteredcountry.length; i++) {
+                    newcountryData.push(dataFromJSON[filteredcountry[i]]);
+                }
+
+                drawGeo(newcountryData);
+            }
+
+
+
         },
         error: function (errorFromJSON) {
-            console.log('Something went wrong, cannot connect to server!');
-            console.log(errorFromJSON);
             alert('Something went wrong, cannot connect to server!');
         },
     })
 };
+
+// Geo Chart Function
+function drawGeo(data) {
+    var geoChart = new google.visualization.DataTable();
+    geoChart.addColumn('string', 'Country');
+    geoChart.addColumn('number', 'Count');
+
+    var countryArray = [];
+    var count = [];
+    
+    for (var i = 0; i < data.length; i++) {
+        var key = data[i].countryVisit;
+        if (countryArray.indexOf(key) >= 0) {
+            count[countryArray.indexOf(key)]++;
+        } else {
+            countryArray.push(key);
+            count.push(1);
+        }
+    }
+
+    for (var i = 0; i < countryArray.length; i++) {
+        geoChart.addRow([countryArray[i], count[i]])
+    };
+
+    var options = {
+        // title: "Counrtry Most Wanted to Visit",
+        colorAxis: { 
+            colors: ['#96b7d8', '#1e76ce'] 
+        },
+        backgroundColor: {
+            fill: 'transparent',
+            color: 'white'
+        }
+    };
+
+    var Geo = new google.visualization.GeoChart(document.getElementById('geoChart'));
+    Geo.draw(geoChart, options);
+}
+   
+
 
 
 
