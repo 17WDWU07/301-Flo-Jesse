@@ -52,6 +52,10 @@ function drawDashboard() {
                     height: '95%',
                     legend: 'none',
                     colors: ['#cfe4f8'],
+                    animation: {
+                        duration: 800,
+                        easing: 'inAndOut'
+                    },
                     backgroundColor: { 
                         fill: 'transparent' 
                     },
@@ -90,6 +94,10 @@ function drawDashboard() {
                     height: '95%',
                     legend: 'none',
                     colors: ['#cfe4f8'],
+                    animation: {
+                        duration: 800,
+                        easing: 'inAndOut',
+                    },
                     backgroundColor: {
                         fill: 'transparent'
                     },
@@ -115,6 +123,7 @@ function drawDashboard() {
                 view: {
                     columns: [1, 7]
                 }
+
             });
 
             var countryPicker = new google.visualization.ControlWrapper({
