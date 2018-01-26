@@ -12,7 +12,8 @@
 
 	<!-- Charts Dashboard -->
 	<div id="dashboardContainer">
-		<div class="firstSection">
+		<!-- Profile and Filter -->
+		<div class="filterAndDisplay">
 			<!-- Filter Menu Box -->
 			<div class="filterControlsContainer">
 				<h3 class="filterHeader">Filters</h3>
@@ -20,7 +21,43 @@
 				<div id="control2"></div>
 				<div id="control3"></div>
 			</div>
-			
+			<!-- Profile Info -->
+			<div class="profileContainer">
+				<div class="profileHeaderWrapper">
+					<h3 class="filterHeader">Profile:</h3>
+					<h5>Select a point on the Scatter chart to View each profile</h5>
+				</div>
+				<div class="profileInfoContainer">
+					<div class="avatarContainer">
+						<img src="avatar" alt="">
+					</div>
+					<div class="profileInfo">
+						<div class="nameWrapper infoWrapper">
+							<h4>Name:</h4>
+							<h6 id="name">hi</h6>
+						</div>
+						<div class="ageWrapper infoWrapper">
+							<h4>Age:</h4>
+							<h6 id="age">hi</h6>
+						</div>
+						<div class="heightWrapper infoWrapper">
+							<h4>Height:</h4>
+							<h6 id="height">hi</h6>
+						</div>
+						<div class="eyeColorWrapper infoWrapper">
+							<h4>Eye Colour:</h4>
+							<h6 id="eyeColor">hi</h6>
+						</div>
+						<div class="destinationWrapper infoWrapper">
+							<h4>Destination:</h4>
+							<h6 id="destination">hi</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="firstSection">
 			<!-- Donut Charts -->
 			<div class="donutChartContainer">
 				<div class="genderPie">
@@ -35,7 +72,6 @@
 					<h3 class="chartHeader">Employment Status</h3>
 					<div id="donutChart3"></div>
 				</div>
-				
 			</div>
 		</div>
 		
@@ -55,7 +91,7 @@
 		<!-- Geo Section Charts -->
 		<div class="geoSectionCharts">
 			<div class="geoChartContainer">
-				<h3 class="geoChartHeader">Counrtry Most Wanted to Visit</h3>
+				<h3 class="geoChartHeader">Country Most Wanted to Visit</h3>
 			<div id="geoChart"></div>
 			</div>
 			

@@ -29,28 +29,52 @@ body{
     margin-top: 25px;
     font-size: 1.3em;
 }
-
-/* First Section CSS */
-.firstSection{
-    width: 85%;
-    height: 300px;
-    margin: 20px auto;
-}
-.filterControlsContainer{
-    float: right;
-    width: 24%;
-    height: 300px;
-    background-color: #34495e;
-    box-shadow: 10px 10px 5px #22313f;
-}
 .filterHeader{
     color: white;
     text-transform: uppercase;
     letter-spacing: 0.2px;
     text-align: center;
     margin-top: 25px;
-    margin-bottom: 15px;
     font-size: 1.5em;
+}
+h5{
+    color: white;
+    font-style: italic;
+    letter-spacing: 0.2px;
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+h4{
+    color: white;
+    letter-spacing: 0.2px;
+    font-size: 1em;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+#name,
+#age,
+#height,
+#eyeColor,
+#destination{
+    color: rgb(220, 222, 230);
+    letter-spacing: 0.2px;
+    font-size: 1em;
+}
+
+
+/*  Filter and Profile */
+.filterAndDisplay{
+    width: 85%;
+    height: 300px;
+    margin: 20px auto;
+}
+.filterControlsContainer{
+    float: left;
+    width: 25%;
+    height: 300px;
+    background-color: #34495e;
+    box-shadow: 10px 10px 5px #22313f;
 }
 #control1, 
 #control2, 
@@ -59,18 +83,38 @@ body{
     margin-top: 20px;
     text-align: center;
     color: rgb(167, 167, 167);
-
 }
 
+.profileContainer{
+    float: right;
+    width: 74%;
+    height: 300px;
+    background-color: #34495e;
+    box-shadow: 10px 10px 5px #22313f;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoWrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+/* First Section CSS */
+.firstSection{
+    width: 85%;
+    height: 300px;
+    margin: 20px auto;
+}
 .donutChartContainer{
-    float: left;
-    width: 75%;
+    width: 100%;
     height: 300px;
     background-color: #34495e;
     box-shadow: 10px 10px 5px #22313f;
     display: flex;
     flex-direction: row;
-
 }
 .genderPie,
 .eyeColorPie,
