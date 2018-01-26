@@ -313,7 +313,9 @@ function genderPie(data){
         pieHole: .4,
         legend: 'none',
         pieSliceBorderColor: '#34495e',
-
+        slices: {
+            1: {offset: 0.1}
+        },
         backgroundColor: {
             fill: 'transparent'
         }
@@ -353,7 +355,9 @@ function eyeColorPie(data){
     var options = {
         pieHole: .4,
         legend: 'none',
-        // colors:[ '#B9E9FF', '#F6BC4F', '#8BD055', '#D07928'],
+        slices: {
+            3: {offset: 0.1},
+        },
         colors: ['#B9E9FF', '#96b7d8', '#68c0e2', '#1e76ce'],
         pieSliceBorderColor: '#34495e',
 
@@ -393,6 +397,9 @@ function workingPie(data){
     var options = {
         pieHole: .4,
         legend: 'none',
+        slices: {
+            2: {offset: 0.1},
+        },
         colors: ['#96b7d8', '#68c0e2', '#1e76ce'],
         pieSliceBorderColor: '#34495e',
 
